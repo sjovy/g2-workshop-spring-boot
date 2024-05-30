@@ -1,0 +1,61 @@
+package se.lexicon.g2workshopspringboot.repository;
+
+import com.sun.source.tree.AssertTree;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.g2workshopspringboot.entity.Details;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+@DataJpaTest
+public class DetailsRepositoryTest {
+
+    @Autowired
+    DetailsRepository detailsRepository;
+
+    @Transactional
+    @Test
+    public void testFindDetailsByEmail() {
+        //1. Arrange
+        Details userDetails = new Details("Test Testson","test@test.se", LocalDate.now());
+
+        //2. Act
+        Details savedDetails = detailsRepository.save(userDetails);
+        Optional<Details> foundDetails = Optional.of(detailsRepository.findDetailsByEmail("test@test.se"));
+
+        //3. Assert
+        Assertions.assertTrue(foundDetails.isPresent());
+    }
+
+    @Transactional
+    @Test
+    public void testFindByNameContains() {
+        //1. Arrange
+        Details userDetails = new Details("Test Testson","test@test.se", LocalDate.now());
+
+        //2. Act
+        Details savedDetails = detailsRepository.save(userDetails);
+        Optional<Details> foundDetails = Optional.of(detailsRepository.findDetailsByNameContains("Test"));
+
+        //3. Assert
+        Assertions.assertTrue(foundDetails.isPresent());
+    }
+
+    @Transactional
+    @Test
+    public void testFindByNameIgnoreCase() {
+        //1. Arrange
+        Details userDetails = new Details("Test Testson","test@test.se", LocalDate.now());
+
+        //2. Act
+        Details savedDetails = detailsRepository.save(userDetails);
+
+        //3. Assert
+        Assertions.assertEquals(userDetails,detailsRepository.findDetailsByNameIgnoreCase("tEst tEstson"));
+    }
+
+}

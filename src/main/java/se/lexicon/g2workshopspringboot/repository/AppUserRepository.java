@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import se.lexicon.g2workshopspringboot.entity.AppUser;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser,String> {
@@ -13,7 +14,7 @@ public interface AppUserRepository extends JpaRepository<AppUser,String> {
     AppUser findAppUserByUsername(String username);
 
     //SELECT * from appUser where RegDate BETWEEN ? and ?
-    AppUser findAppUserByRegDateBetween(LocalDate date1, LocalDate date2);
+    List<AppUser> findAppUserByRegDateBetween(LocalDate date1, LocalDate date2);
 
     AppUser findAppUserByUserDetails_Id(int id);
 

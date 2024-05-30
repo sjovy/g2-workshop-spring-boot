@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import se.lexicon.g2workshopspringboot.repository.AppUserRepository;
 import se.lexicon.g2workshopspringboot.repository.DetailsRepository;
 
+
+
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {
 
@@ -16,6 +18,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
     DetailsRepository detailsRepository;
 
     public void run(String...args) throws Exception {
+
 
 
 
