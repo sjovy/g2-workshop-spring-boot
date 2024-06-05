@@ -35,6 +35,11 @@ public class AppUser {
     @OneToMany(mappedBy = "borrower")
     private List<BookLoan> bookLoans;
 
+    public void addBookLoan(BookLoan bookLoan) {
+        bookLoans.add(bookLoan);
+        bookLoan.setBorrower(this);
+    }
+
     public AppUser(String username, String password) {
         this.username = username;
         this.password = password;
